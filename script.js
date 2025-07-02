@@ -1,33 +1,3 @@
-// === Firebase Config ===
-const firebaseConfig = {
-  apiKey: "AIzaSyDZXZoNjP4S7esAxIKqk_xNHh-3PkVpsHs",
-  authDomain: "beluga-1014.firebaseapp.com",
-  databaseURL: "https://beluga-1014-default-rtdb.firebaseio.com",
-  projectId: "beluga-1014",
-  storageBucket: "beluga-1014.firebasestorage.app",
-  messagingSenderId: "63392649535",
-  appId: "1:63392649535:web:12923a6ab8db31e8ee438a",
-  measurementId: "G-BVEKBQ0S8M"
-};
-
-// === Initialize Firebase ===
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-auth.signInAnonymously().catch(console.error);
-
-// === Telegram Init ===
-const tg = window.Telegram.WebApp;
-tg.expand(); // Make full screen
-
-// Get Telegram user info
-const tgUser = tg.initDataUnsafe?.user || {};
-const username = tgUser.username || tgUser.first_name || "Guest";
-
-// Show username in UI
-document.querySelector("h1").textContent = `ArcadiumX: @${username}`;
-
-// === Game Setup ===
 const board = document.getElementById("board");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
@@ -73,30 +43,17 @@ function botMove() {
   if (isDraw()) return endGame("Draw!");
 }
 
-function checkWin(p) {
-  return winCombos.some(combo => combo.every(i => cells[i] === p));
+function checkWin(player) {
+  return winCombos.some(combo => combo.every(i => cells[i] === player));
 }
 
 function isDraw() {
-  return cells.every(c => c !== "");
+  return cells.every(cell => cell !== "");
 }
 
-function endGame(msg) {
+function endGame(message) {
   gameOver = true;
-  statusText.textContent = msg;
-
-  const score = msg.includes("win") ? 1 : 0;
-
-  db.collection("scores").add({
-    username,
-    score,
-    result: msg,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  }).then(() => {
-    console.log("✅ Score saved!");
-  }).catch((err) => {
-    console.error("❌ Failed to save score:", err);
-  });
+  statusText.textContent = message;
 }
 
 function restartGame() {
