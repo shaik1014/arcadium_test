@@ -1,3 +1,24 @@
+// === Telegram Init (Safe) ===
+let tgUser = {};
+let username = "guest";
+let fullName = "Guest";
+let userPhoto = "https://via.placeholder.com/100";
+
+if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe?.user) {
+  const tg = Telegram.WebApp;
+  tg.expand();
+
+  tgUser = tg.initDataUnsafe.user;
+  username = tgUser.username || "N/A";
+  const firstName = tgUser.first_name || "";
+  const lastName = tgUser.last_name || "";
+  fullName = `${firstName} ${lastName}`.trim();
+  userPhoto = tgUser.photo_url || userPhoto;
+} else {
+  console.warn("⚠️ Not running inside Telegram. Some features may be disabled.");
+}
+
+// === Game Logic ===
 const board = document.getElementById("board");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
@@ -6,9 +27,9 @@ let cells = Array(9).fill("");
 let gameOver = false;
 
 const winCombos = [
-  [0,1,2], [3,4,5], [6,7,8],
-  [0,3,6], [1,4,7], [2,5,8],
-  [0,4,8], [2,4,6]
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6]
 ];
 
 function renderBoard() {
@@ -63,6 +84,31 @@ function restartGame() {
   renderBoard();
 }
 
-restartBtn.addEventListener("click", restartGame);
+// === Event Listeners ===
+document.addEventListener("DOMContentLoaded", () => {
+  restartBtn.addEventListener("click", restartGame);
+  renderBoard();
 
-renderBoard();
+  // === Profile Modal Logic ===
+  const profileBtn = document.getElementById("profile-button");
+  const modal = document.getElementById("profile-modal");
+  const closeBtn = document.getElementById("close-modal");
+  const nameEl = document.getElementById("user-name");
+  const usernameEl = document.getElementById("user-username");
+  const photoEl = document.getElementById("user-photo");
+
+  profileBtn?.addEventListener("click", () => {
+    nameEl.textContent = fullName || "Unknown";
+    usernameEl.textContent = username.startsWith("@") ? username : "@" + username;
+    photoEl.src = userPhoto;
+    modal.classList.remove("hidden");
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.add("hidden");
+  });
+});

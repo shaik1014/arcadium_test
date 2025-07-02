@@ -8,11 +8,28 @@
 </head>
 <body>
   <div class="container">
-    <h1>Tic Tac Toe</h1>
+    <div class="top-bar">
+      <h1>Tic Tac Toe</h1>
+      <div id="profile-button">👤</div>
+    </div>
+
     <p id="status">Your turn (X)</p>
     <div class="board" id="board"></div>
     <button id="restart">🔁 Restart</button>
   </div>
+
+  <!-- Profile Modal -->
+  <div id="profile-modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="close-modal">&times;</span>
+      <h2>User Profile</h2>
+      <img id="user-photo" src="" alt="Profile photo" />
+      <p><strong>Name:</strong> <span id="user-name"></span></p>
+      <p><strong>Username:</strong> <span id="user-username"></span></p>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
+
 </html>
