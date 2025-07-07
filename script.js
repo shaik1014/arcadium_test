@@ -3,15 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
   tg.expand();
 
   const user = tg.initDataUnsafe?.user;
-
   const usernameElem = document.getElementById("username");
   const profilePic = document.getElementById("profile-pic");
 
   if (user) {
     const fullName = user.first_name + (user.last_name ? " " + user.last_name : "");
-    document.getElementById("username").innerText = fullName;
-
-    const profilePic = document.getElementById("profile-pic");
     usernameElem.innerText = fullName;
 
     if (user.photo_url) {
@@ -20,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
       profilePic.src = "https://via.placeholder.com/150/4CAF50/ffffff?text=" + encodeURIComponent(user.first_name[0]);
     }
   } else {
-    document.getElementById("username").innerText = "Guest";
     usernameElem.innerText = "Guest";
   }
 
