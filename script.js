@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Debug: Show full Telegram object on screen
   console.log("Telegram User:", user);
-  document.body.innerHTML += `<pre style="margin-top:20px;">${JSON.stringify(user, null, 2)}</pre>`;
 
   if (user) {
     const fullName = user.first_name + (user.last_name ? " " + user.last_name : "");
