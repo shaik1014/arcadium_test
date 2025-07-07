@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const user = tg.initDataUnsafe?.user;
 
-  // Debug: Show full Telegram object on screen
-  console.log("Telegram User:", user);
 
   if (user) {
     const fullName = user.first_name + (user.last_name ? " " + user.last_name : "");
