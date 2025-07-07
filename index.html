@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Telegram Profile</title>
   <title>ArcadiumX | Tic Tac Toe</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
+  <div class="profile-card">
   <!-- Game title on top-left -->
   <div class="game-title">
     🕹️ Tic Tac Toe
@@ -20,12 +19,8 @@
   <!-- Profile in top-right -->
   <div class="profile-wrapper">
     <img id="profile-pic" class="profile-pic" src="https://via.placeholder.com/150" alt="Profile Picture">
+    <h2 id="username">Loading...</h2>
     <div id="username" class="username hidden">Loading...</div>
-  </div>
-
-  <!-- Scoreboard -->
-  <div id="scoreboard" class="scoreboard">
-    Wins: 0 | Losses: 0 | Draws: 0
   </div>
 
   <!-- Game Area -->
