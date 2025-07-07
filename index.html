@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile Card</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Telegram Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
   <div class="profile-card">
-    <img src="baldal.jpg" alt="Profile Picture" class="profile-pic">
-    <h2>Vercel</h2>
+    <img id="profile-pic" class="profile-pic" src="https://via.placeholder.com/150" alt="Profile Picture">
+    <h2 id="username">Loading...</h2>
   </div>
 
+  <script src="script.js"></script>
 </body>
 </html>
